@@ -9,12 +9,15 @@
     let info = document.querySelector("#ex2_content");
     input.addEventListener("input", () => {
         let text = input.value;
-        info.textContent = "";
+        let errors = [];
+
         if (text.length !== 9)
-            info.textContent += "Długość numeru musi być równa 9";
+            errors.push("Długość numeru musi być równa 9");
         if (/\p{L}/u.test(text))
-            info.textContent += "Numer nie może zawierać liter";
-        if (/[^0-9]/.test(text))
-            info.textContent += "Numer nie może zawierać znaków specjalnych";
+            errors.push("Numer nie może zawierać liter");
+        if (/[^0-9\p{L}]/u.test(text))
+            errors.push("Numer nie może zawierać znaków specjalnych");
+
+        info.textContent = errors.join("\n");
     });
 })();
