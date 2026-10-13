@@ -11,13 +11,14 @@
         let text = input.value;
         let errors = [];
 
-        if (text.length !== 9)
-            errors.push("Długość numeru musi być równa 9");
-        if (/\p{L}/u.test(text))
-            errors.push("Numer nie może zawierać liter");
+        if (text.length !== 9) errors.push("Długość numeru musi być równa 9");
+        if (/\p{L}/u.test(text)) errors.push("Numer nie może zawierać liter");
         if (/[^0-9\p{L}]/u.test(text))
             errors.push("Numer nie może zawierać znaków specjalnych");
 
         info.textContent = errors.join("\n");
+
+        if (errors.length == 0)
+            info.textContent = "Numer telefonu jest poprawny";
     });
 })();
